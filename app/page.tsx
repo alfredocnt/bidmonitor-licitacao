@@ -7,9 +7,9 @@ import {
   User,
   Clipboard
 } from 'lucide-react'
+import { Input } from '@/components/ui/input'
 import OpportunityCard from '@/components/OpportunityCard'
 import SortDropdown from '@/components/SortDropdown'
-import { colors } from '@/styles/designSystem'
 
 export default function AirbnbStylePage() {
   const [sortBy, setSortBy] = useState('budget-high')
@@ -113,201 +113,47 @@ export default function AirbnbStylePage() {
 
 
   return (
-    <div style={{
-      fontFamily: "'Circular', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif",
-      backgroundColor: colors.background.primary,
-      minHeight: '100vh'
-    }}>
+    <div className="font-primary bg-background-primary min-h-screen">
       {/* Airbnb-style Header */}
-      <header style={{
-        backgroundColor: colors.background.secondary + 'f8',
-        borderBottom: `1px solid ${colors.border.light}`,
-        position: 'sticky',
-        top: 0,
-        zIndex: 1000,
-        backdropFilter: 'blur(16px)'
-      }}>
-        <div style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-          padding: '0 24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          height: '80px'
-        }}>
+      <header className="bg-background-secondary/95 border-b border-border-light sticky top-0 z-50 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
           {/* Logo */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px'
-          }}>
-            <div style={{
-              width: '32px',
-              height: '32px',
-              backgroundColor: colors.primary.main,
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              <Clipboard size={16} color="white" />
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+              <Clipboard size={16} className="text-white" />
             </div>
-            <span style={{
-              fontSize: '22px',
-              fontWeight: '600',
-              color: colors.primary.main,
-              letterSpacing: '-0.02em'
-            }}>
+            <span className="text-xl font-semibold text-primary tracking-tight">
               BidMonitor
             </span>
           </div>
 
-          {/* Search Bar - Airbnb style */}
-          <div style={{
-            backgroundColor: colors.background.secondary,
-            border: `1px solid ${colors.border.light}`,
-            borderRadius: '40px',
-            padding: '8px 16px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            minWidth: '400px',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
-            cursor: 'pointer',
-            transition: 'box-shadow 0.2s ease'
-          }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              flex: 1
-            }}>
-              <div>
-                <div style={{
-                  fontSize: '14px',
-                  fontWeight: '600',
-                  color: colors.text.primary,
-                  marginBottom: '2px'
-                }}>
-                  Categoria
-                </div>
-                <div style={{
-                  fontSize: '12px',
-                  color: colors.text.secondary
-                }}>
-                  Construção
-                </div>
-              </div>
-              <div style={{
-                width: '1px',
-                height: '32px',
-                backgroundColor: colors.border.light
-              }} />
-              <div>
-                <div style={{
-                  fontSize: '14px',
-                  fontWeight: '600',
-                  color: colors.text.primary,
-                  marginBottom: '2px'
-                }}>
-                  Valor Estimado
-                </div>
-                <div style={{
-                  fontSize: '12px',
-                  color: colors.text.secondary
-                }}>
-                  Qualquer valor
-                </div>
-              </div>
-              <div style={{
-                width: '1px',
-                height: '32px',
-                backgroundColor: colors.border.light
-              }} />
-              <div>
-                <div style={{
-                  fontSize: '14px',
-                  fontWeight: '600',
-                  color: colors.text.primary,
-                  marginBottom: '2px'
-                }}>
-                  Prazo
-                </div>
-                <div style={{
-                  fontSize: '12px',
-                  color: colors.text.secondary
-                }}>
-                  Este mês
-                </div>
-              </div>
-            </div>
-            <div style={{
-              backgroundColor: colors.secondary.main,
-              borderRadius: '50%',
-              width: '32px',
-              height: '32px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              <Search size={16} color="white" />
-            </div>
+          {/* Search Bar */}
+          <div className="relative w-96">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+            <Input
+              type="search"
+              placeholder="Buscar oportunidades..."
+              className="pl-10 pr-4"
+            />
           </div>
 
           {/* Profile Menu */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '16px'
-          }}>
-            <div style={{
-              backgroundColor: colors.background.secondary,
-              border: `1px solid ${colors.border.light}`,
-              borderRadius: '24px',
-              padding: '8px 8px 8px 16px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              cursor: 'pointer'
-            }}>
-              <Menu size={14} color={colors.text.secondary} />
-              <div style={{
-                width: '32px',
-                height: '32px',
-                backgroundColor: colors.text.secondary,
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <User size={16} color="white" />
+          <div className="flex items-center gap-4">
+            <div className="bg-background-secondary border border-border-light rounded-3xl py-2 px-4 pr-2 flex items-center gap-2 cursor-pointer hover:shadow-md transition-shadow">
+              <Menu size={14} className="text-text-secondary" />
+              <div className="w-8 h-8 bg-text-secondary rounded-full flex items-center justify-center">
+                <User size={16} className="text-white" />
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      <div style={{
-        maxWidth: '1280px',
-        margin: '0 auto',
-        padding: '32px 24px'
-      }}>
+      <div className="max-w-7xl mx-auto px-6 py-8">
 
         {/* Results Header */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '24px'
-        }}>
-          <h1 style={{
-            fontSize: '32px',
-            fontWeight: '600',
-            color: colors.text.primary,
-            margin: 0,
-            letterSpacing: '-0.02em'
-          }}>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-semibold text-text-primary tracking-tight">
             152 oportunidades encontradas
           </h1>
 
@@ -315,12 +161,7 @@ export default function AirbnbStylePage() {
         </div>
 
         {/* Vertical List Layout */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-          marginBottom: '48px'
-        }}>
+        <div className="flex flex-col gap-4 mb-12">
           {sortedOpportunities.map((opp) => (
             <OpportunityCard
               key={opp.id}
@@ -339,23 +180,9 @@ export default function AirbnbStylePage() {
           ))}
         </div>
 
-        {/* Load More - Airbnb style */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginBottom: '48px'
-        }}>
-          <button style={{
-            backgroundColor: colors.text.primary,
-            color: 'white',
-            border: 'none',
-            borderRadius: '8px',
-            padding: '14px 24px',
-            fontSize: '16px',
-            fontWeight: '600',
-            cursor: 'pointer',
-            transition: 'all 0.2s ease'
-          }}>
+        {/* Load More */}
+        <div className="flex justify-center mb-12">
+          <button className="bg-text-primary text-white border-none rounded-lg py-3.5 px-6 text-base font-semibold cursor-pointer hover:bg-opacity-90 transition-all duration-200">
             Mostrar mais oportunidades
           </button>
         </div>

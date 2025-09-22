@@ -2,7 +2,6 @@
 
 import React from 'react'
 import { ChevronRight } from 'lucide-react'
-import { colors } from '@/styles/designSystem'
 
 interface OpportunityCardProps {
   title: string
@@ -31,150 +30,51 @@ export default function OpportunityCard({
 }: OpportunityCardProps) {
   return (
     <div
-      style={{
-        backgroundColor: colors.background.secondary,
-        borderRadius: '12px',
-        cursor: 'pointer',
-        transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-        border: `1px solid ${colors.border.light}`,
-        padding: '16px',
-        position: 'relative',
-        display: 'flex',
-        gap: '24px'
-      }}
+      className="bg-background-secondary rounded-xl cursor-pointer transition-all duration-200 border border-border-light p-4 relative flex gap-6 hover:-translate-y-0.5 hover:shadow-lg group"
       onClick={onClick}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-2px)'
-        e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.08)'
-        const arrow = e.currentTarget.querySelector('.hover-arrow') as HTMLElement
-        if (arrow) {
-          arrow.style.opacity = '1'
-          arrow.style.transform = 'translateY(-50%) translateX(0px)'
-        }
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'translateY(0px)'
-        e.currentTarget.style.boxShadow = 'none'
-        const arrow = e.currentTarget.querySelector('.hover-arrow') as HTMLElement
-        if (arrow) {
-          arrow.style.opacity = '0'
-          arrow.style.transform = 'translateY(-50%) translateX(-8px)'
-        }
-      }}
     >
       {/* Hover Arrow */}
-      <div
-        className="hover-arrow"
-        style={{
-          position: 'absolute',
-          top: '50%',
-          right: '20px',
-          transform: 'translateY(-50%) translateX(-8px)',
-          opacity: '0',
-          transition: 'all 0.2s ease',
-          backgroundColor: colors.secondary.main,
-          borderRadius: '50%',
-          width: '32px',
-          height: '32px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
-        <ChevronRight size={16} color="white" />
+      <div className="absolute top-1/2 right-5 -translate-y-1/2 translate-x-2 opacity-0 transition-all duration-200 bg-secondary rounded-full w-8 h-8 flex items-center justify-center group-hover:opacity-100 group-hover:translate-x-0">
+        <ChevronRight size={16} className="text-white" />
       </div>
 
       {/* Left Column - 1/3 width */}
-      <div style={{
-        flex: '0 0 33.33%',
-        paddingRight: '60px' // Space for hover arrow
-      }}>
+      <div className="flex-none w-1/3 pr-15">
         {/* Breadcrumb - at the top */}
-        <div style={{
-          fontSize: '12px',
-          color: colors.text.secondary,
-          fontWeight: '500',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px',
-          marginBottom: '8px'
-        }}>
+        <div className="text-xs text-text-secondary font-medium flex items-center gap-1.5 mb-2">
           <span>{hierarchy.service}</span>
-          <span style={{ color: colors.border.light }}>›</span>
+          <span className="text-border-light">›</span>
           <span>{hierarchy.type}</span>
-          <span style={{ color: colors.border.light }}>›</span>
+          <span className="text-border-light">›</span>
           <span>{hierarchy.subtype}</span>
         </div>
 
         {/* Main Content */}
-        <div style={{
-          marginBottom: '12px'
-        }}>
-          <h3 style={{
-            fontSize: '18px',
-            fontWeight: '600',
-            color: colors.text.primary,
-            margin: '0 0 6px 0',
-            lineHeight: '1.3',
-            letterSpacing: '-0.01em'
-          }}>
+        <div className="mb-3">
+          <h3 className="text-lg font-semibold text-text-primary mb-1.5 leading-tight tracking-tight">
             {title}
           </h3>
-          <p style={{
-            fontSize: '14px',
-            color: colors.text.secondary,
-            margin: '0',
-            lineHeight: '1.4'
-          }}>
+          <p className="text-sm text-text-secondary leading-relaxed">
             {entity} • {location}
           </p>
         </div>
 
         {/* Bottom Part - Metrics */}
-        <div style={{
-          paddingTop: '12px',
-          borderTop: `1px solid ${colors.border.light}`
-        }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '12px'
-          }}>
+        <div className="pt-3 border-t border-border-light">
+          <div className="grid grid-cols-2 gap-3">
             <div>
-              <div style={{
-                fontSize: '11px',
-                color: colors.text.secondary,
-                fontWeight: '500',
-                marginBottom: '2px',
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em'
-              }}>
+              <div className="text-xs text-text-secondary font-medium mb-0.5 uppercase tracking-wider">
                 Valor Estimado
               </div>
-              <div style={{
-                fontSize: '15px',
-                fontWeight: '600',
-                color: colors.text.primary
-              }}>
+              <div className="text-sm font-semibold text-text-primary">
                 {budget}
               </div>
             </div>
             <div>
-              <div style={{
-                fontSize: '11px',
-                color: colors.text.secondary,
-                fontWeight: '500',
-                marginBottom: '2px',
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em'
-              }}>
+              <div className="text-xs text-text-secondary font-medium mb-0.5 uppercase tracking-wider">
                 Prazo
               </div>
-              <div style={{
-                fontSize: '15px',
-                fontWeight: '600',
-                color: colors.text.primary
-              }}>
+              <div className="text-sm font-semibold text-text-primary">
                 {deadline}
               </div>
             </div>
@@ -183,31 +83,14 @@ export default function OpportunityCard({
       </div>
 
       {/* Right Column - 2/3 width */}
-      <div style={{
-        flex: '1',
-        paddingLeft: '24px',
-        paddingRight: '60px', // Space for hover arrow
-        borderLeft: `1px solid ${colors.border.light}`
-      }}>
+      <div className="flex-1 pl-6 pr-15 border-l border-border-light">
         {/* Description Header */}
-        <div style={{
-          fontSize: '12px',
-          color: colors.text.secondary,
-          fontWeight: '500',
-          textTransform: 'uppercase',
-          letterSpacing: '0.05em',
-          marginBottom: '8px'
-        }}>
+        <div className="text-xs text-text-secondary font-medium uppercase tracking-wider mb-2">
           Descrição
         </div>
 
         {/* Description Content */}
-        <div style={{
-          fontSize: '14px',
-          color: colors.text.primary,
-          lineHeight: '1.6',
-          fontWeight: '400'
-        }}>
+        <div className="text-sm text-text-primary leading-relaxed">
           {description}
         </div>
       </div>
