@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import { ArrowUpDown, ChevronDown, Check } from 'lucide-react'
-import { colors } from '@/styles/designSystem'
 
 interface SortDropdownProps {
   sortBy: string
@@ -22,94 +21,35 @@ export default function SortDropdown({ sortBy, onSortChange }: SortDropdownProps
   const currentOption = sortOptions.find(opt => opt.id === sortBy)
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div className="relative">
       <button
-        style={{
-          backgroundColor: colors.background.secondary,
-          border: `1px solid ${colors.border.light}`,
-          borderRadius: '8px',
-          padding: '12px 16px',
-          fontSize: '14px',
-          fontWeight: '500',
-          color: colors.text.primary,
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          minWidth: '180px',
-          justifyContent: 'space-between',
-          transition: 'border-color 0.2s ease'
-        }}
+        className="bg-background-secondary border border-border-light rounded-lg py-3 px-4 text-sm font-medium text-text-primary cursor-pointer flex items-center gap-2 min-w-44 justify-between transition-colors hover:border-border-medium"
         onClick={() => setIsOpen(!isOpen)}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = colors.border.medium
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = colors.border.light
-        }}
       >
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px'
-        }}>
-          <ArrowUpDown size={16} color={colors.text.secondary} />
+        <div className="flex items-center gap-2">
+          <ArrowUpDown size={16} className="text-text-secondary" />
           <span>{currentOption?.label}</span>
         </div>
         <ChevronDown
           size={16}
-          color={colors.text.secondary}
-          style={{
-            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-            transition: 'transform 0.2s ease'
-          }}
+          className={`text-text-secondary transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
         />
       </button>
 
       {isOpen && (
-        <div style={{
-          position: 'absolute',
-          top: '100%',
-          right: 0,
-          marginTop: '4px',
-          backgroundColor: colors.background.secondary,
-          border: `1px solid ${colors.border.light}`,
-          borderRadius: '8px',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-          minWidth: '200px',
-          zIndex: 1000,
-          overflow: 'hidden'
-        }}>
+        <div className="absolute top-full right-0 mt-1 bg-background-secondary border border-border-light rounded-lg shadow-lg min-w-52 z-50 overflow-hidden">
           {sortOptions.map((option) => (
             <button
               key={option.id}
-              style={{
-                width: '100%',
-                padding: '12px 16px',
-                fontSize: '14px',
-                color: colors.text.primary,
-                backgroundColor: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                transition: 'background-color 0.2s ease'
-              }}
+              className="w-full py-3 px-4 text-sm text-text-primary bg-transparent border-none cursor-pointer flex items-center justify-between transition-colors hover:bg-background-tertiary"
               onClick={() => {
                 onSortChange(option.id)
                 setIsOpen(false)
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = colors.background.tertiary
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent'
-              }}
             >
               <span>{option.label}</span>
               {sortBy === option.id && (
-                <Check size={16} color={colors.secondary.main} />
+                <Check size={16} className="text-secondary" />
               )}
             </button>
           ))}
