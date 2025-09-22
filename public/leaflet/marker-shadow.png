@@ -1,0 +1,4 @@
+# This is a placeholder for the Leaflet marker shadow
+# In a real project, you would download the actual marker icons from:
+# https://github.com/Leaflet/Leaflet/tree/main/dist/images
+# and place them in this directory
